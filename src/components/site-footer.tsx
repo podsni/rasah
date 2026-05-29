@@ -45,8 +45,8 @@ export function SiteFooter() {
           <h4 className="font-display text-base text-gold mb-3">Hubungi Kami</h4>
           <ul className="space-y-2 text-sm">
             <li className="flex items-center gap-2"><Phone className="h-4 w-4 text-gold" /> 0851 5545 2687</li>
-            <li className="flex items-center gap-2"><Instagram className="h-4 w-4 text-gold" /> rasabuah.mlg</li>
-            <li className="flex items-center gap-2"><Music2 className="h-4 w-4 text-gold" /> rasabuah.mlg</li>
+            <li className="flex items-center gap-2"><Instagram className="h-4 w-4 text-gold" /> <a href="https://instagram.com/rasabuah.mlg" target="_blank" rel="noreferrer" className="hover:text-gold transition-colors">rasabuah.mlg</a></li>
+            <li className="flex items-center gap-2"><Music2 className="h-4 w-4 text-gold" /> <a href="https://tiktok.com/@rasabuah.mlg" target="_blank" rel="noreferrer" className="hover:text-gold transition-colors">rasabuah.mlg</a></li>
           </ul>
           <p className="mt-4 text-xs text-background/60">Pelayanan setiap hari · 08.00 – 18.00 WIB</p>
         </div>

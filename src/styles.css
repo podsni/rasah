@@ -160,3 +160,75 @@
   --color-olive-soft: var(--olive-soft);
   --color-whatsapp: var(--whatsapp);
 }
+
+/* ─── Motion Design Tokens (Premium personality) ─── */
+:root {
+  /* Signature easings — Emil + motion-design skill */
+  --ease-out-premium: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out-strong:  cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-exit:     cubic-bezier(0.3, 0, 1, 1);
+  --ease-spring:      cubic-bezier(0.175, 0.885, 0.32, 1.1);
+
+  /* Duration palette: quick / standard / slow */
+  --dur-quick:    200ms;
+  --dur-standard: 350ms;
+  --dur-slow:     550ms;
+}
+
+/* Entrance: slide-up + fade (Premium, 20px offset) */
+@keyframes enter-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Entrance: scale-in from 0.96 (modals, lightbox) */
+@keyframes enter-scale {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Exit: fade + scale down */
+@keyframes exit-scale {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.96); }
+}
+
+/* Image reveal: clip from bottom */
+@keyframes reveal-clip {
+  from { clip-path: inset(0 0 100% 0); }
+  to   { clip-path: inset(0 0 0% 0); }
+}
+
+/* Fade in only */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Stagger utility classes */
+.stagger-1 { animation-delay: 0ms; }
+.stagger-2 { animation-delay: 60ms; }
+.stagger-3 { animation-delay: 120ms; }
+.stagger-4 { animation-delay: 180ms; }
+.stagger-5 { animation-delay: 240ms; }
+.stagger-6 { animation-delay: 300ms; }
+
+/* Scroll reveal — starts hidden, JS adds .revealed */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity var(--dur-standard) var(--ease-out-premium),
+              transform var(--dur-standard) var(--ease-out-premium);
+}
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* prefers-reduced-motion: keep opacity, remove movement */
+@media (prefers-reduced-motion: reduce) {
+  @keyframes enter-up    { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes enter-scale { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes reveal-clip { from { opacity: 0; } to { opacity: 1; } }
+  .scroll-reveal { transform: none; }
+}

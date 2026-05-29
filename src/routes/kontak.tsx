@@ -72,8 +72,8 @@ function Kontak() {
         </div>
 
         <aside className="space-y-4">
-          <Card icon={<Phone className="h-4 w-4" />} title="WhatsApp" value="0851 5545 2687" />
-          <Card icon={<Instagram className="h-4 w-4" />} title="Instagram" value="@rasabuah.mlg" />
+          <Card icon={<Phone className="h-4 w-4" />} title="WhatsApp" value="0851 5545 2687" href="https://wa.me/6285155452687" />
+          <Card icon={<Instagram className="h-4 w-4" />} title="Instagram" value="@rasabuah.mlg" href="https://instagram.com/rasabuah.mlg" />
           <Card icon={<MapPin className="h-4 w-4" />} title="Area Pengiriman" value="Malang & sekitarnya" />
           <Card icon={<Clock className="h-4 w-4" />} title="Jam Operasional" value="Setiap hari · 08.00 – 18.00 WIB" />
         </aside>
@@ -93,11 +93,12 @@ function Field({ label, children, className = "" }: { label: string; children: R
   );
 }
 
-function Card({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) {
-  return (
-    <div className="rounded-2xl border border-border/60 bg-card p-5">
+function Card({ icon, title, value, href }: { icon: React.ReactNode; title: string; value: string; href?: string }) {
+  const content = (
+    <div className={"rounded-2xl border border-border/60 bg-card p-5" + (href ? " hover:border-primary/40 transition-colors" : "")}>
       <div className="flex items-center gap-2 text-primary">{icon}<span className="text-xs font-semibold uppercase tracking-wider">{title}</span></div>
       <div className="mt-1 text-sm font-medium text-olive-deep">{value}</div>
     </div>
   );
+  return href ? <a href={href} target="_blank" rel="noreferrer">{content}</a> : content;
 }

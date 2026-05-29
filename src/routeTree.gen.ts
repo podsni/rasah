@@ -16,6 +16,7 @@ import { Route as KontakRouteImport } from './routes/kontak'
 import { Route as KatalogRouteImport } from './routes/katalog'
 import { Route as CustomRouteImport } from './routes/custom'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as KatalogIndexRouteImport } from './routes/katalog.index'
 import { Route as KatalogSlugRouteImport } from './routes/katalog.$slug'
 
 const TestimoniRoute = TestimoniRouteImport.update({
@@ -53,6 +54,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KatalogIndexRoute = KatalogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => KatalogRoute,
+} as any)
 const KatalogSlugRoute = KatalogSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -68,16 +74,17 @@ export interface FileRoutesByFullPath {
   '/tentang': typeof TentangRoute
   '/testimoni': typeof TestimoniRoute
   '/katalog/$slug': typeof KatalogSlugRoute
+  '/katalog/': typeof KatalogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/custom': typeof CustomRoute
-  '/katalog': typeof KatalogRouteWithChildren
   '/kontak': typeof KontakRoute
   '/rekomendasi': typeof RekomendasiRoute
   '/tentang': typeof TentangRoute
   '/testimoni': typeof TestimoniRoute
   '/katalog/$slug': typeof KatalogSlugRoute
+  '/katalog': typeof KatalogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +96,7 @@ export interface FileRoutesById {
   '/tentang': typeof TentangRoute
   '/testimoni': typeof TestimoniRoute
   '/katalog/$slug': typeof KatalogSlugRoute
+  '/katalog/': typeof KatalogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,16 +109,17 @@ export interface FileRouteTypes {
     | '/tentang'
     | '/testimoni'
     | '/katalog/$slug'
+    | '/katalog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/custom'
-    | '/katalog'
     | '/kontak'
     | '/rekomendasi'
     | '/tentang'
     | '/testimoni'
     | '/katalog/$slug'
+    | '/katalog'
   id:
     | '__root__'
     | '/'
@@ -121,6 +130,7 @@ export interface FileRouteTypes {
     | '/tentang'
     | '/testimoni'
     | '/katalog/$slug'
+    | '/katalog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -184,6 +194,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/katalog/': {
+      id: '/katalog/'
+      path: '/'
+      fullPath: '/katalog/'
+      preLoaderRoute: typeof KatalogIndexRouteImport
+      parentRoute: typeof KatalogRoute
+    }
     '/katalog/$slug': {
       id: '/katalog/$slug'
       path: '/$slug'
@@ -196,10 +213,12 @@ declare module '@tanstack/react-router' {
 
 interface KatalogRouteChildren {
   KatalogSlugRoute: typeof KatalogSlugRoute
+  KatalogIndexRoute: typeof KatalogIndexRoute
 }
 
 const KatalogRouteChildren: KatalogRouteChildren = {
   KatalogSlugRoute: KatalogSlugRoute,
+  KatalogIndexRoute: KatalogIndexRoute,
 }
 
 const KatalogRouteWithChildren =
@@ -217,3 +236,13 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

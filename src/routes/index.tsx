@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { Apple, Package, Truck, Heart, MessageCircle, ArrowRight, Star, Sparkles } from "lucide-react";
 import { products, waLink } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
-import heroImg from "@/assets/products/heavenly-garden-l.jpg";
+import heroImg from "@/assets/hero-person.jpg";
 
 const features = [
   { icon: Apple, title: "Buah Segar Pilihan", desc: "Dipetik & dipilih setiap hari" },

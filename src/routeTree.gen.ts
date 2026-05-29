@@ -9,38 +9,174 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TestimoniRouteImport } from './routes/testimoni'
+import { Route as TentangRouteImport } from './routes/tentang'
+import { Route as RekomendasiRouteImport } from './routes/rekomendasi'
+import { Route as KontakRouteImport } from './routes/kontak'
+import { Route as KatalogRouteImport } from './routes/katalog'
+import { Route as CustomRouteImport } from './routes/custom'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as KatalogSlugRouteImport } from './routes/katalog.$slug'
 
+const TestimoniRoute = TestimoniRouteImport.update({
+  id: '/testimoni',
+  path: '/testimoni',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TentangRoute = TentangRouteImport.update({
+  id: '/tentang',
+  path: '/tentang',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RekomendasiRoute = RekomendasiRouteImport.update({
+  id: '/rekomendasi',
+  path: '/rekomendasi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontakRoute = KontakRouteImport.update({
+  id: '/kontak',
+  path: '/kontak',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KatalogRoute = KatalogRouteImport.update({
+  id: '/katalog',
+  path: '/katalog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CustomRoute = CustomRouteImport.update({
+  id: '/custom',
+  path: '/custom',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KatalogSlugRoute = KatalogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => KatalogRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/custom': typeof CustomRoute
+  '/katalog': typeof KatalogRouteWithChildren
+  '/kontak': typeof KontakRoute
+  '/rekomendasi': typeof RekomendasiRoute
+  '/tentang': typeof TentangRoute
+  '/testimoni': typeof TestimoniRoute
+  '/katalog/$slug': typeof KatalogSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/custom': typeof CustomRoute
+  '/katalog': typeof KatalogRouteWithChildren
+  '/kontak': typeof KontakRoute
+  '/rekomendasi': typeof RekomendasiRoute
+  '/tentang': typeof TentangRoute
+  '/testimoni': typeof TestimoniRoute
+  '/katalog/$slug': typeof KatalogSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/custom': typeof CustomRoute
+  '/katalog': typeof KatalogRouteWithChildren
+  '/kontak': typeof KontakRoute
+  '/rekomendasi': typeof RekomendasiRoute
+  '/tentang': typeof TentangRoute
+  '/testimoni': typeof TestimoniRoute
+  '/katalog/$slug': typeof KatalogSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/custom'
+    | '/katalog'
+    | '/kontak'
+    | '/rekomendasi'
+    | '/tentang'
+    | '/testimoni'
+    | '/katalog/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/custom'
+    | '/katalog'
+    | '/kontak'
+    | '/rekomendasi'
+    | '/tentang'
+    | '/testimoni'
+    | '/katalog/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/custom'
+    | '/katalog'
+    | '/kontak'
+    | '/rekomendasi'
+    | '/tentang'
+    | '/testimoni'
+    | '/katalog/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CustomRoute: typeof CustomRoute
+  KatalogRoute: typeof KatalogRouteWithChildren
+  KontakRoute: typeof KontakRoute
+  RekomendasiRoute: typeof RekomendasiRoute
+  TentangRoute: typeof TentangRoute
+  TestimoniRoute: typeof TestimoniRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/testimoni': {
+      id: '/testimoni'
+      path: '/testimoni'
+      fullPath: '/testimoni'
+      preLoaderRoute: typeof TestimoniRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tentang': {
+      id: '/tentang'
+      path: '/tentang'
+      fullPath: '/tentang'
+      preLoaderRoute: typeof TentangRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/rekomendasi': {
+      id: '/rekomendasi'
+      path: '/rekomendasi'
+      fullPath: '/rekomendasi'
+      preLoaderRoute: typeof RekomendasiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontak': {
+      id: '/kontak'
+      path: '/kontak'
+      fullPath: '/kontak'
+      preLoaderRoute: typeof KontakRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/katalog': {
+      id: '/katalog'
+      path: '/katalog'
+      fullPath: '/katalog'
+      preLoaderRoute: typeof KatalogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/custom': {
+      id: '/custom'
+      path: '/custom'
+      fullPath: '/custom'
+      preLoaderRoute: typeof CustomRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +184,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/katalog/$slug': {
+      id: '/katalog/$slug'
+      path: '/$slug'
+      fullPath: '/katalog/$slug'
+      preLoaderRoute: typeof KatalogSlugRouteImport
+      parentRoute: typeof KatalogRoute
+    }
   }
 }
 
+interface KatalogRouteChildren {
+  KatalogSlugRoute: typeof KatalogSlugRoute
+}
+
+const KatalogRouteChildren: KatalogRouteChildren = {
+  KatalogSlugRoute: KatalogSlugRoute,
+}
+
+const KatalogRouteWithChildren =
+  KatalogRoute._addFileChildren(KatalogRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CustomRoute: CustomRoute,
+  KatalogRoute: KatalogRouteWithChildren,
+  KontakRoute: KontakRoute,
+  RekomendasiRoute: RekomendasiRoute,
+  TentangRoute: TentangRoute,
+  TestimoniRoute: TestimoniRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

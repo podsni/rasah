@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowLeft, Check, MessageCircle, Minus, Plus } from "lucide-react";
-import { getProduct, formatRp, packagingLabel, occasionLabel, waLink, products } from "@/lib/products";
+import { getProduct, formatRp, packagingLabel, occasionLabel, waLink, products, type Product } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
 
 export const Route = createFileRoute("/katalog/$slug")({
@@ -39,7 +39,7 @@ export const Route = createFileRoute("/katalog/$slug")({
 });
 
 function Detail() {
-  const { product } = Route.useLoaderData();
+  const { product } = Route.useLoaderData() as { product: Product };
   const [qty, setQty] = useState(1);
   const [note, setNote] = useState("");
 

@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowLeft, Check, MessageCircle, Minus, Plus } from "lucide-react";
+import { ArrowLeft, Check, MessageCircle, Minus, Plus, ZoomIn, X } from "lucide-react";
 import { getProduct, formatRp, packagingLabel, occasionLabel, waLink, products, type Product } from "@/lib/products";
 import { ProductCard } from "@/components/product-card";
 
@@ -42,6 +42,7 @@ function Detail() {
   const { product } = Route.useLoaderData() as { product: Product };
   const [qty, setQty] = useState(1);
   const [note, setNote] = useState("");
+  const [zoom, setZoom] = useState(false);
 
   const message =
     `Halo Rasabuah Malang, saya ingin pesan:\n\n` +
@@ -60,9 +61,17 @@ function Detail() {
       </Link>
 
       <div className="mt-6 grid gap-10 lg:grid-cols-2">
-        <div className="overflow-hidden rounded-3xl border border-border/60 bg-card">
-          <img src={product.image} alt={product.name} className="aspect-[4/5] w-full object-cover" />
-        </div>
+        <button
+          type="button"
+          onClick={() => setZoom(true)}
+          className="group relative overflow-hidden rounded-3xl border border-border/60 bg-card focus:outline-none focus:ring-2 focus:ring-primary"
+          aria-label="Perbesar gambar"
+        >
+          <img src={product.image} alt={product.name} className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-105" />
+          <span className="absolute right-3 top-3 inline-flex items-center gap-1 rounded-full bg-background/85 backdrop-blur px-2.5 py-1 text-[10px] font-medium text-olive-deep">
+            <ZoomIn className="h-3 w-3" /> Klik untuk perbesar
+          </span>
+        </button>
 
         <div>
           {product.badge && (
@@ -134,6 +143,30 @@ function Detail() {
           {related.map((p) => <ProductCard key={p.slug} p={p} />)}
         </div>
       </section>
+
+      {zoom && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4 animate-in fade-in"
+          onClick={() => setZoom(false)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <button
+            type="button"
+            onClick={() => setZoom(false)}
+            className="absolute right-4 top-4 grid h-10 w-10 place-items-center rounded-full bg-background/90 text-olive-deep hover:bg-background"
+            aria-label="Tutup"
+          >
+            <X className="h-5 w-5" />
+          </button>
+          <img
+            src={product.image}
+            alt={product.name}
+            onClick={(e) => e.stopPropagation()}
+            className="max-h-[90vh] max-w-[95vw] rounded-2xl object-contain shadow-2xl"
+          />
+        </div>
+      )}
     </div>
   );
 }

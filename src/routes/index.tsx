@@ -78,9 +78,15 @@ function Index() {
           <div className="relative">
             <div className="absolute -inset-8 -z-10 rounded-[3rem] bg-gradient-to-br from-gold/30 via-secondary to-transparent blur-3xl" />
             <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card shadow-2xl shadow-olive-deep/20">
-              <img src={heroImg} alt="Heavenly Garden hampers" className="aspect-[4/5] w-full object-cover" />
+              <img
+                src={heroImg}
+                alt="Garden Collection — Rasabuah Malang"
+                loading="eager"
+                className="aspect-[4/5] w-full object-cover object-center"
+              />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-olive-deep/40 to-transparent" />
             </div>
-            <div className="absolute -bottom-5 -left-5 hidden rounded-2xl border border-border bg-background/95 p-4 shadow-xl backdrop-blur md:block">
+            <div className="absolute -bottom-4 left-4 md:-bottom-5 md:-left-5 rounded-2xl border border-border bg-background/95 p-3 md:p-4 shadow-xl backdrop-blur">
               <div className="flex items-center gap-1 text-gold">
                 {[...Array(5)].map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
               </div>

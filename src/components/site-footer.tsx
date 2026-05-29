@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { Instagram, Music2, Phone, Leaf } from "lucide-react";
+import { Instagram, Music2, Phone } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 export function SiteFooter() {
   return (
@@ -7,8 +8,8 @@ export function SiteFooter() {
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-4 py-14 md:grid-cols-4 md:px-8">
         <div className="space-y-3">
           <div className="flex items-center gap-2">
-            <span className="grid h-9 w-9 place-items-center rounded-full bg-background/10">
-              <Leaf className="h-5 w-5 text-gold" />
+            <span className="grid h-11 w-11 place-items-center rounded-full bg-background p-1">
+              <img src={logo} alt="Rasabuah" className="h-full w-full object-contain" />
             </span>
             <div className="leading-tight">
               <div className="font-display text-lg">Rasabuah Malang</div>

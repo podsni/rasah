@@ -62,26 +62,31 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --radius: 1rem;
+  /* Cream background, deep olive primary, gold accent */
+  --background: oklch(0.972 0.018 88);
+  --foreground: oklch(0.28 0.04 130);
+  --card: oklch(0.985 0.012 88);
+  --card-foreground: oklch(0.28 0.04 130);
+  --popover: oklch(0.985 0.012 88);
+  --popover-foreground: oklch(0.28 0.04 130);
+  --primary: oklch(0.42 0.07 135);
+  --primary-foreground: oklch(0.975 0.02 88);
+  --secondary: oklch(0.93 0.025 88);
+  --secondary-foreground: oklch(0.32 0.05 135);
+  --muted: oklch(0.93 0.02 88);
+  --muted-foreground: oklch(0.48 0.03 120);
+  --accent: oklch(0.78 0.12 85);
+  --accent-foreground: oklch(0.28 0.05 135);
+  --destructive: oklch(0.55 0.2 27);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.88 0.02 90);
+  --input: oklch(0.9 0.02 90);
+  --ring: oklch(0.42 0.07 135);
+  --gold: oklch(0.74 0.13 82);
+  --olive-deep: oklch(0.34 0.06 135);
+  --olive-soft: oklch(0.55 0.07 130);
+  --whatsapp: oklch(0.68 0.17 150);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -140,5 +145,18 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: 'Inter', system-ui, sans-serif;
   }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+@theme inline {
+  --color-gold: var(--gold);
+  --color-olive-deep: var(--olive-deep);
+  --color-olive-soft: var(--olive-soft);
+  --color-whatsapp: var(--whatsapp);
 }
